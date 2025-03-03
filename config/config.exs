@@ -67,6 +67,20 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# To check the job
+# Change state to :active
+# or
+# run in shell
+# `iex> MyQuantum.Scheduler.activate_job(:tiker)`
+config :my_quantum, MyQuantum.Scheduler,
+  jobs: [
+    tiker: [
+      schedule: {:extended, "*/2"},
+      task: fn -> IO.puts("double tick") end,
+      state: :inactive
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
