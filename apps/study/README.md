@@ -1,3 +1,0 @@
-# Study
-
-**TODO: Add description**
