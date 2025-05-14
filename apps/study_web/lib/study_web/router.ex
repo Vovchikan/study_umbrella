@@ -23,6 +23,12 @@ defmodule StudyWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/examples", StudyWeb.Examples do
+    pipe_through :browser
+
+    live "/sidebar", SidebarLive.Index, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", StudyWeb do
   #   pipe_through :api
