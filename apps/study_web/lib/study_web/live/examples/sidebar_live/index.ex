@@ -3,7 +3,17 @@ defmodule StudyWeb.Examples.SidebarLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    items = [
+      %{
+        id: 1,
+        title: "Famous Quote",
+        items: [%{id: 4, title: "Settings", href: ~p"/users/settings"}]
+      },
+      %{id: 2, title: "UK Saying", items: []},
+      %{id: 3, title: "I know...", items: []}
+    ]
+
+    {:ok, socket |> assign(items: items)}
   end
 
   @impl true

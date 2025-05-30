@@ -26,7 +26,11 @@ defmodule StudyWeb.Router do
   scope "/examples", StudyWeb.Examples do
     pipe_through :browser
 
-    live "/sidebar", SidebarLive.Index, :index
+    live_session :sidebar_example do
+      live "/sidebar", SidebarLive.Index, :index
+      live "/sidebar/new", SidebarLive.Index, :new
+      live "/sidebar/edit", SidebarLive.Index, :edit
+    end
   end
 
   # Other scopes may use custom stacks.
