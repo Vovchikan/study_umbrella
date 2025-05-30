@@ -1,4 +1,4 @@
-defmodule StudyWeb.Examples.SidebarLive.Index do
+defmodule StudyWeb.Examples.HomeLive.Index do
   use StudyWeb, :live_view
 
   @impl true
@@ -23,17 +23,17 @@ defmodule StudyWeb.Examples.SidebarLive.Index do
 
   defp apply_action(socket, :edit, _params) do
     socket
-    |> assign(:page_title, "Edit Sidebar")
+    |> assign(:page_title, "Edit Home")
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Sidebar")
+    |> assign(:page_title, "New Home")
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Sidebar")
+    |> assign(:page_title, "Listing Home")
   end
 
   @impl true

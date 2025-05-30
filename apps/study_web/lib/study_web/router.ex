@@ -23,13 +23,13 @@ defmodule StudyWeb.Router do
     get "/", PageController, :home
   end
 
-  scope "/examples", StudyWeb.Examples do
+  scope "/lvexamples", StudyWeb.Examples do
     pipe_through :browser
 
-    live_session :sidebar_example do
-      live "/sidebar", SidebarLive.Index, :index
-      live "/sidebar/new", SidebarLive.Index, :new
-      live "/sidebar/edit", SidebarLive.Index, :edit
+    live_session :home_live do
+      live "/home", HomeLive.Index, :index
+      live "/home/new", HomeLive.Index, :new
+      live "/home/edit", HomeLive.Index, :edit
     end
   end
 

@@ -34,7 +34,7 @@
       <ul class="space-y-2 font-medium">
         <li>
           <a
-            href={~p"/"}
+            href={~p"/lvexamples/home"}
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <.icon
@@ -46,7 +46,9 @@
         </li>
         <li>
           <a
-            href="#"
+            href={~p"/dev/dashboard"}
+            target="_blank"
+            rel="noopener noreferrer"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <.icon
@@ -153,7 +155,7 @@
           </div>
           <div class="expanded-content hidden text-md font-light">
             <.link
-              patch={~p"/examples/sidebar"}
+              patch={~p"/lvexamples/home"}
               class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
             >
               index
@@ -161,7 +163,7 @@
           </div>
           <div class="expanded-content hidden text-md font-light">
             <.link
-              patch={~p"/examples/sidebar/edit"}
+              patch={~p"/lvexamples/home/edit"}
               class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
             >
               edit
@@ -169,7 +171,7 @@
           </div>
           <div class="expanded-content hidden text-md font-light">
             <.link
-              patch={~p"/examples/sidebar/new"}
+              patch={~p"/lvexamples/home/new"}
               class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
             >
               new
