@@ -27,6 +27,180 @@
 
 <.flash_group flash={@flash} />
 
-<main class="px-4 py-8 sm:px-6 lg:px-8 w-full bg-gradient-to-r from-slate-400 to-stone-300">
-  {@inner_content}
-</main>
+<div class="flex h-[calc(100vh_-_theme(spacing.16))]"> <!-- высота = весь экран - высота header'а -->
+  <!-- Sidebar -->
+  <aside id="default-sidebar" class="w-64 h-full" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 bg-gray-50 dark:bg-gray-800 overflow-y-auto">
+      <ul class="space-y-2 font-medium">
+        <li>
+          <a
+            href={~p"/"}
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-home-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="ms-3">Home</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-chart-pie-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="ms-3">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-squares-2x2-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
+            <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
+              Pro
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-envelope-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
+            <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+              3
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-users-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-shopping-bag-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-arrow-right-end-on-rectangle-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          >
+            <.icon
+              name="hero-pencil-square-solid"
+              class="text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white group h-6 w-6"
+            />
+            <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+          </a>
+        </li>
+        <div class="h-px bg-purple-600 my-4"></div>
+        <li
+          id={"item-title"}
+          class="p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          phx-click={
+            JS.toggle_class("hidden", to: "#item-title > .expanded-content")
+            |> JS.toggle_class("rotate-180", to: "#item-title .chevron", time: 300)
+          }
+        >
+          <div class="flex justify-between">
+            <div class="font-medium">
+              Titles
+            </div>
+            <div class="chevron transition-all duration-300">
+              <.icon name="hero-chevron-down" class="text-lg" />
+            </div>
+          </div>
+          <div class="expanded-content hidden text-md font-light">
+            <.link
+              patch={~p"/examples/sidebar"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              index
+            </.link>
+          </div>
+          <div class="expanded-content hidden text-md font-light">
+            <.link
+              patch={~p"/examples/sidebar/edit"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              edit
+            </.link>
+          </div>
+          <div class="expanded-content hidden text-md font-light">
+            <.link
+              patch={~p"/examples/sidebar/new"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              new
+            </.link>
+          </div>
+        </li>
+        <li
+          :for={item <- @items}
+          id={"item-#{item.id}"}
+          class="px-4 py-3 cursor-pointer bg-purple-100 rounded-md border border-purple-300 text-purple-600"
+          phx-click={JS.toggle_class("hidden", to: "#item-#{item.id} > .expanded-content")}
+        >
+          <div class="font-medium">
+            <%= item.title %>
+          </div>
+          <div :if={item.items != []} class="expanded-content hidden mt-2 text-purple-800 text-md font-light">
+            <.link
+              :for={subitem <- item.items}
+              href={subitem.href}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Settings
+            </.link>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Content area -->
+  <main class="flex-1 px-4 py-8 sm:px-6 lg:px-8 w-full bg-gradient-to-r from-slate-400 to-stone-300 overflow-y-auto">
+    {@inner_content}
+  </main>
+</div>
