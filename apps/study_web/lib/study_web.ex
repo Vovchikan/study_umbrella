@@ -38,9 +38,7 @@ defmodule StudyWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller,
-        formats: [:html, :json],
-        layouts: [html: StudyWeb.Layouts]
+      use Phoenix.Controller, formats: [:html, :json]
 
       use Gettext, backend: StudyWeb.Gettext
 
@@ -52,8 +50,7 @@ defmodule StudyWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {StudyWeb.Layouts, :app}
+      use Phoenix.LiveView
 
       unquote(html_helpers())
     end
@@ -90,8 +87,9 @@ defmodule StudyWeb do
       # Core UI components
       import StudyWeb.CoreComponents
 
-      # Shortcut for generating JS commands
+      # Common modules used in templates
       alias Phoenix.LiveView.JS
+      alias StudyWeb.Layouts
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())

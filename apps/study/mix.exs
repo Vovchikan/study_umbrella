@@ -37,13 +37,13 @@ defmodule Study.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:dns_cluster, "~> 0.1.1"},
+      {:dns_cluster, "~> 0.2.0"},
       {:phoenix_pubsub, "~> 2.1"},
-      {:ecto_sql, "~> 3.10"},
+      {:ecto_sql, "~> 3.13"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
-      {:swoosh, "~> 1.5"},
-      {:finch, "~> 0.13"}
+      {:swoosh, "~> 1.16"},
+      {:req, "~> 0.5"}
     ]
   end
 
