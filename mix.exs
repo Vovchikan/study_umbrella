@@ -32,6 +32,8 @@ defmodule Study.Umbrella.MixProject do
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
     [
+      {:tidewave, "~> 0.5", only: [:dev]},
+      {:igniter, "~> 0.6", only: [:dev, :test]},
       # Required to run "mix format" on ~H/.heex files from the umbrella root
       {:phoenix_live_view, ">= 0.0.0"}
     ]
