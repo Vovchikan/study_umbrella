@@ -30,7 +30,7 @@ defmodule MyQuantum.MixProject do
 
   defp deps do
     [
-      {:quantum, "~> 3.0"},
+      {:quantum, "~> 3.0"}
     ]
   end
 

@@ -34,6 +34,7 @@ defmodule Study.Umbrella.MixProject do
     [
       {:tidewave, "~> 0.5", only: [:dev]},
       {:igniter, "~> 0.6", only: [:dev, :test]},
+      {:divo, "~> 1.3", only: [:dev, :test], runtime: false},
       # Required to run "mix format" on ~H/.heex files from the umbrella root
       {:phoenix_live_view, ">= 0.0.0"}
     ]

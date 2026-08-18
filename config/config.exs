@@ -22,7 +22,6 @@ config :study, :scopes,
     test_setup_helper: :register_and_log_in_user
   ]
 
-
 # Configure Mix tasks and generators
 config :study,
   ecto_repos: [Study.Repo]
@@ -35,6 +34,31 @@ config :study,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :study, Study.Mailer, adapter: Swoosh.Adapters.Local
+
+# config :study,
+#   divo: %{
+#     version: "3.8",
+#     services: %{
+#       zitadel: %{
+#         image: "zitadel",
+#         ports: ["8088:8080"],
+#         environment: %{
+#           "ORACLE_PASSWORD" => "admin", # change this
+#           "APP_USER" => "study_dev", # change this
+#           "APP_USER_PASSWORD" => "study_dev" # change this
+#         },
+#         volumes: [],
+#         healthcheck: %{  # change this
+#           start_period: "3m",
+#           test: ["CMD", "healthcheck.sh"],
+#           interval: "10s",
+#           timeout: "5s",
+#           retries: 20
+#         }
+#       }
+#     }
+#   },
+#   divo_wait: [dwell: 2000, max_tries: 20]
 
 config :study_web,
   ecto_repos: [Study.Repo],

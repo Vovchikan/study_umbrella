@@ -10,7 +10,7 @@ defmodule Study.Application do
     children = [
       Study.Repo,
       {DNSCluster, query: Application.get_env(:study, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Study.PubSub},
+      {Phoenix.PubSub, name: Study.PubSub}
       # Start a worker by calling: Study.Worker.start_link(arg)
       # {Study.Worker, arg}
     ]
