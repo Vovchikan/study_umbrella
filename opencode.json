@@ -4,7 +4,7 @@
   "mcp": {
     "tidewave": {
       "type": "remote",
-      "url": "http://localhost:$PORT/tidewave/mcp",
+      "url": "http://localhost:4014/tidewave/mcp",
       "enabled": true
     }
   }
