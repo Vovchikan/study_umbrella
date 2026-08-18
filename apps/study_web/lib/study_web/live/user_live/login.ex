@@ -35,6 +35,16 @@ defmodule StudyWeb.UserLive.Login do
           </div>
         </div>
 
+        <div :if={dev_environment?()} class="alert alert-info">
+          <.icon name="hero-information-circle" class="size-6 shrink-0" />
+          <div>
+            <p>You are running dev build.</p>
+            <p>
+              To create an account, visit <.link href="/users/register" class="underline">the register page</.link>.
+            </p>
+          </div>
+        </div>
+
         <.form
           :let={f}
           for={@form}
@@ -129,6 +139,10 @@ defmodule StudyWeb.UserLive.Login do
   end
 
   defp local_mail_adapter? do
-    Application.get_env(:study_web, Study.Mailer)[:adapter] == Swoosh.Adapters.Local
+    Application.get_env(:study, Study.Mailer)[:adapter] == Swoosh.Adapters.Local
+  end
+
+  defp dev_environment? do
+    Application.get_env(:study_web, :dev_routes, false)
   end
 end
