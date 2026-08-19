@@ -10,6 +10,29 @@ import Config
 config :study_web, StudyWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+# Flash auto-dismiss config with runtime env overrides (Format B: per-kind timeouts)
+# Use FLASH_INFO_TIMEOUT, FLASH_ERROR_TIMEOUT to override at runtime.
+# nil / 0 / empty disables auto-dismiss for that kind.
+flash_overrides =
+  [
+    info: System.get_env("FLASH_INFO_TIMEOUT"),
+    error: System.get_env("FLASH_ERROR_TIMEOUT")
+  ]
+  |> Enum.reject(fn {_k, v} -> is_nil(v) end)
+  |> Map.new(fn {k, v} ->
+    timeout =
+      case Integer.parse(v) do
+        {int, ""} when int > 0 -> int
+        _ -> nil
+      end
+
+    {k, timeout}
+  end)
+
+if map_size(flash_overrides) > 0 do
+  config :study_web, :flash, auto_dismiss: flash_overrides
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

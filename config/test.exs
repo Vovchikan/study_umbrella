@@ -23,6 +23,11 @@ config :study_web, StudyWeb.Endpoint,
   secret_key_base: "ssDE2sAvQQbe/vcl+SdfQGMQpn10WkQnBI4Q8PmQG7vbcZlICZrIUfvDev296OrI",
   server: false
 
+config :study_web, :flash,
+  auto_dismiss: %{
+    info: 5_000
+  }
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 

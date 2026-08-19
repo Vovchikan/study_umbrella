@@ -70,6 +70,12 @@ config :study_web, StudyWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :study_web, dev_routes: true
 
+config :study_web, :flash,
+  auto_dismiss: %{
+    info: 1000,
+    error: 2000
+  }
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :default_formatter, format: "[$level] $message\n"
 

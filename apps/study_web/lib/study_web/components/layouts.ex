@@ -26,14 +26,13 @@ defmodule StudyWeb.Layouts do
 
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
-
-  attr :current_scope, :map,
-    default: nil,
-    doc: "the current [scope](https://hexdocs.pm/phoenix/scopes.html)"
-
+  attr :current_scope, :map, default: nil, doc: "the current [scope](https://hexdocs.pm/phoenix/scopes.html)"
+  attr :timeouts, :map, default: nil, doc: "the optional map of flash timeouts"
   slot :inner_block, required: true
 
   def app(assigns) do
+    assigns = assign(assigns, :timeouts, resolve_timeouts(assigns[:timeouts]))
+
     ~H"""
     <header class="navbar px-4 sm:px-6 lg:px-8">
       <div class="flex-1">
@@ -68,7 +67,7 @@ defmodule StudyWeb.Layouts do
       </div>
     </main>
 
-    <.flash_group flash={@flash} />
+    <.flash_group flash={@flash} timeouts={@timeouts} />
     """
   end
 
@@ -81,12 +80,15 @@ defmodule StudyWeb.Layouts do
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :id, :string, default: "flash-group", doc: "the optional id of flash container"
+  attr :timeouts, :map, default: nil, doc: "the optional map of flash timeouts"
 
   def flash_group(assigns) do
+    assigns = assign(assigns, :timeouts, resolve_timeouts(assigns[:timeouts]))
+
     ~H"""
     <div id={@id} aria-live="polite">
-      <.flash kind={:info} flash={@flash} />
-      <.flash kind={:error} flash={@flash} />
+      <.flash kind={:info} flash={@flash} timeout={@timeouts[:info]} />
+      <.flash kind={:error} flash={@flash} timeout={@timeouts[:error]} />
 
       <.flash
         id="client-error"
@@ -151,4 +153,14 @@ defmodule StudyWeb.Layouts do
     </div>
     """
   end
+
+  defp flash_auto_dismiss do
+    Application.get_env(:study_web, :flash, [])
+    |> Keyword.get(:auto_dismiss, %{})
+  end
+
+  defp resolve_timeouts(nil), do: flash_auto_dismiss()
+
+  defp resolve_timeouts(overrides) when is_map(overrides),
+    do: Map.merge(flash_auto_dismiss(), overrides)
 end

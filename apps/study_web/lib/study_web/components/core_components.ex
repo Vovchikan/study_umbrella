@@ -42,7 +42,8 @@ defmodule StudyWeb.CoreComponents do
   attr :id, :string, doc: "the optional id of flash container"
   attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
   attr :title, :string, default: nil
-  attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
+  attr :kind, :atom, values: [:info, :error], doc: "styling flash"
+  attr :timeout, :integer, default: nil, doc: "milliseconds before dismissing the flash"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   slot :inner_block, doc: "the optional inner block that renders the flash message"
@@ -54,6 +55,8 @@ defmodule StudyWeb.CoreComponents do
     <div
       :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
       id={@id}
+      phx-hook=".AutoDismissFlash"
+      data-timeout={@timeout}
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class="toast toast-top toast-end z-50"
@@ -76,6 +79,33 @@ defmodule StudyWeb.CoreComponents do
         </button>
       </div>
     </div>
+    <script :type={Phoenix.LiveView.ColocatedHook} name=".AutoDismissFlash">
+      export default {
+        mounted() {
+          this.dismiss = () => this.js().exec(this.el.getAttribute("phx-click"))
+          this.restartTimer = () => {
+            clearTimeout(this.timer)
+            const timeout = Number(this.el.dataset.timeout)
+            if (timeout > 0) this.timer = setTimeout(this.dismiss, timeout)
+          }
+
+          this.restartTimer()
+          if (!this.el.dataset.timeout) return
+
+          this.el.addEventListener("mouseenter", () => clearTimeout(this.timer))
+          this.el.addEventListener("mouseleave", this.restartTimer)
+          this.el.addEventListener("focusin", () => clearTimeout(this.timer))
+          this.el.addEventListener("focusout", this.restartTimer)
+          this.el.addEventListener("phx:hide-start", () => clearTimeout(this.timer))
+        },
+        updated() {
+          this.restartTimer()
+        },
+        destroyed() {
+          clearTimeout(this.timer)
+        }
+      }
+    </script>
     """
   end
 
