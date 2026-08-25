@@ -1,0 +1,1 @@
+Always respond to the user in Russian (Русский язык). All explanations, answers, and conversational text must be written in Russian. Code, identifiers, and commit messages remain unchanged unless the user asks otherwise.
