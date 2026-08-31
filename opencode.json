@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-websearch"],
+  "plugin": ["opencode-websearch", "opencode-openai-codex-auth"],
   "instructions": ["AGENTS.md", ".opencode/instructions/russian.md"],
   "mcp": {
     "tidewave": {
